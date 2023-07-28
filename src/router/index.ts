@@ -1,20 +1,11 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router'
+import { useUserStore } from '@/store/user';
 
 const routes = [
   {
     path: '/',
-    component: () => import('@/layouts/default/Default.vue'),
-    children: [
-      {
-        path: '',
-        name: 'Home',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
-      },
-    ],
+    component: () => import('@/views/Home.vue'),
   }, {
     path: '/user',
     children: [
@@ -31,6 +22,14 @@ const router = createRouter({
   // history: createWebHistory(process.env.BASE_URL),
   history: createWebHistory('/static/'),
   routes,
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.path !== '/user/login' && useUserStore().token === '') {
+    next('/user/login');
+  } else {
+    next();
+  }
 })
 
 export default router

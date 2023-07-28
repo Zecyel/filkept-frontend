@@ -1,24 +1,12 @@
 <template>
   <v-app>
-
     <app-bar />
 
-
-    <v-navigation-drawer>
-      123
-    </v-navigation-drawer>
-
-    <v-navigation-drawer location="right">
-      123
-    </v-navigation-drawer>
-
     <v-main>
-
       <router-view />
-
     </v-main>
 
-    <!-- <foot-bar /> -->
+    <foot-bar />
   </v-app>
 </template>
 
