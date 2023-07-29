@@ -43,13 +43,7 @@ let loading = false
 function submit() {
   console.log(username.value)
   console.log(password.value)
-  let userInfo: UserLoginApi = {
-    payload: {
-      username: username.value,
-      password: password.value
-    }
-  }
-  callApi(userInfo)
+
 }
 
 </script>

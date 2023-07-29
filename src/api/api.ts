@@ -1,30 +1,35 @@
 import axios from '@/plugins/axios'
 import { toasts } from '@/plugins/toast'
+import { TypeAnnotation } from '@/api/type'
 
-interface ApiData {}
-
-interface ApiResponse<T extends ApiData> {
+interface ApiResponse {
     hint: string
     status: 'success' | 'error' | 'warning'
-    data: T
+    data: object
 }
 
-interface Api<T extends ApiData, U extends ApiData> {
-    method: 'get' | 'post'
-    path: string
-    payload: T
-    response: ApiResponse<U>
+interface Api {
+    url: string
+    method: 'post'
+    req: TypeAnnotation
+    resp: TypeAnnotation
 }
 
-function callApi<T extends ApiData, U extends ApiData>(api: Api<T, U>, silent: boolean = false): U | void {
-    let ret: Promise<ApiResponse<U>>
-    switch (api.method) {
-        case 'get':
-            throw 'Get method not implemented yet.'
-        case 'post':
-            ret = axios.post(api.path, api.payload)
+function callApi(api: Api, data: any, silent: boolean): object | undefined {
+    if (! api.req.match(data)) {
+        console.error('Failed to match request.', api, data)
+        return undefined
     }
-    ret.then((resp: ApiResponse<U>) => {
+    let ret: Promise<ApiResponse>
+    switch (api.method) {
+        case 'post':
+            ret = axios.post(api.url, data)
+    }
+    ret.then((resp: ApiResponse) => {
+        if (! api.resp.match(resp.data)) {
+            console.error('Failed to match response.', api, resp)
+            return undefined
+        }
         if (resp.status == 'success' && !silent) {
             toasts.success(resp.hint)
             return resp.data
@@ -42,7 +47,5 @@ function callApi<T extends ApiData, U extends ApiData>(api: Api<T, U>, silent: b
 
 export {
     Api,
-    ApiData,
-    ApiResponse,
     callApi
 }
