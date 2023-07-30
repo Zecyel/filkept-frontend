@@ -4,7 +4,7 @@ import { TypeAnnotation } from '@/api/type'
 
 interface ApiResponse {
     hint: string
-    status: 'success' | 'error' | 'warning'
+    status: 'success' | 'error' | 'warning' | 'token_error'
     data: object
 }
 
@@ -27,6 +27,10 @@ function callApi(api: Api, data: any, silent: boolean): object | undefined {
     }
     ret.then((response) => {
         let resp: ApiResponse = response.data as ApiResponse
+        if (resp.status == 'token_error') {
+            toasts.error(resp.hint)
+            return undefined
+        }
         if (! api.resp.match(resp.data)) {
             console.error('Failed to match response.', api, resp)
             return undefined
