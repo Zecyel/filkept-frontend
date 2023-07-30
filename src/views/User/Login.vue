@@ -11,15 +11,14 @@
         <v-card-text>
             <v-form validate-on="submit lazy" @submit.prevent="submit">
               <v-text-field
-                v-model="username"
+                v-model="data.username"
                 label="用户名"
               ></v-text-field>
               <v-text-field
-                v-model="password"
+                v-model="data.password"
                 label="密码"
               ></v-text-field>
               <v-btn
-                :loading="loading"
                 type="submit"
                 block
                 class="mt-2"
@@ -35,15 +34,15 @@
 import { ref } from 'vue'
 import { callApi } from '@/api/api'
 import { UserLoginApi } from '@/api/user/user'
+import { reactive } from 'vue';
 
-let username = ref('')
-let password = ref('')
-let loading = false
+let data = reactive({
+  username: '',
+  password: ''
+})
 
 function submit() {
-  console.log(username.value)
-  console.log(password.value)
-
+  let result = callApi(UserLoginApi, data, false)
 }
 
 </script>

@@ -25,7 +25,8 @@ function callApi(api: Api, data: any, silent: boolean): object | undefined {
         case 'post':
             ret = axios.post(api.url, data)
     }
-    ret.then((resp: ApiResponse) => {
+    ret.then((response) => {
+        let resp: ApiResponse = response.data as ApiResponse
         if (! api.resp.match(resp.data)) {
             console.error('Failed to match response.', api, resp)
             return undefined

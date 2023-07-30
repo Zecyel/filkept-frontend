@@ -52,7 +52,7 @@ class Optional<T extends TypeAnnotation> extends TypeAnnotation {
     }
 
     match (a: any): boolean {
-        return !a || this.elem.match(a)
+        return a == undefined || this.elem.match(a)
     }
 }
 
