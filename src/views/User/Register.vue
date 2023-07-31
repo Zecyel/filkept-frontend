@@ -6,7 +6,7 @@
         style="margin-top: 40px;"
     >
         <v-card-item>
-            <v-card-title>登录</v-card-title>
+            <v-card-title>注册</v-card-title>
         </v-card-item>
         <v-card-text>
             <v-form validate-on="submit lazy" @submit.prevent="submit">
@@ -29,28 +29,19 @@
     </v-card>
 </template>
 
-
 <script lang="ts" setup>
 
+import { callApi } from '@/api/api';
+import { UserRegisterApi } from '@/api/user/user';
 import { reactive } from 'vue';
-import { useUserStore } from '@/store/user';
-import { callApi } from '@/api/api'
-import { UserLoginApi } from '@/api/user/user'
 
 let data = reactive({
-  username: '',
-  password: ''
+    username: '',
+    password: ''
 })
 
-const userStore = useUserStore()
-
 function submit() {
-  let result = callApi(UserLoginApi, data)
-  if (result) {
-    userStore.username = data.username
-    userStore.token = (result as any).token
-    console.log(result)
-  }
+    let ret = callApi(UserRegisterApi, data)
 }
 
 </script>

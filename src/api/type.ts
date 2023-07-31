@@ -2,6 +2,12 @@ abstract class TypeAnnotation {
     abstract match(a: any): boolean
 }
 
+class Nothing extends TypeAnnotation {
+    match(a: any): boolean {
+        return true
+    }
+}
+
 class NumberVariant extends TypeAnnotation {
     match(a: any): boolean {
         return typeof a == 'number'
@@ -129,6 +135,7 @@ class Dict extends TypeAnnotation {
 
 export {
     TypeAnnotation,
+    Nothing,
     NumberLiteral,
     StringLiteral,
     NumberVariant,

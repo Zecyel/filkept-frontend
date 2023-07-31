@@ -13,6 +13,10 @@ const routes = [
         path: 'login',
         name: 'Login',
         component: () => import('@/views/User/Login.vue'),
+      }, {
+        path: 'register',
+        name: 'Register',
+        component: () => import('@/views/User/Register.vue'),
       }
     ]
   },
@@ -25,7 +29,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.path !== '/user/login' && useUserStore().token === '') {
+  if (to.path !== '/user/login' && to.path !== '/user/register' && useUserStore().token === '') {
     next('/user/login');
   } else {
     next();
