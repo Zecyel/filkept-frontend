@@ -19,7 +19,7 @@ interface Api {
 
 const store = useUserStore()
 
-function callApi(api: Api, data: any, silent: boolean = false): object | undefined {
+function callApi(api: Api, data: any, callback: (arg0: object) => void, silent: boolean = false) {
     if (! api.req.match(data)) {
         console.error('Failed to match request.', api, data)
         return undefined
@@ -32,7 +32,7 @@ function callApi(api: Api, data: any, silent: boolean = false): object | undefin
         case 'must':
             if (! store.token_exist) {
                 toasts.error('请登陆后操作')
-                return undefined
+                return
             }
             headers.token = store.token
         case 'opt':
@@ -47,17 +47,19 @@ function callApi(api: Api, data: any, silent: boolean = false): object | undefin
     }
     ret.then((response) => {
         let resp: ApiResponse = response.data as ApiResponse
+
         if (resp.status == 'token_error') {
             toasts.error(resp.hint)
-            return undefined
+            return
         }
         if (! api.resp.match(resp.data)) {
             console.error('Failed to match response.', api, resp)
-            return undefined
+            return
         }
-        if (resp.status == 'success' && !silent) {
-            toasts.success(resp.hint)
-            return resp.data
+        if (resp.status == 'success') {
+            if (! silent)
+                toasts.success(resp.hint)
+            callback(resp.data)
         }
         if (resp.status == 'error' && !silent)
             toasts.error(resp.hint)

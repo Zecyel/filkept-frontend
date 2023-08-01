@@ -33,6 +33,7 @@
 
 import { callApi } from '@/api/api';
 import { UserRegisterApi } from '@/api/user/user';
+import router from '@/router';
 import { reactive } from 'vue';
 
 let data = reactive({
@@ -41,7 +42,9 @@ let data = reactive({
 })
 
 function submit() {
-    let ret = callApi(UserRegisterApi, data)
+    callApi(UserRegisterApi, data, (resp) => {
+      router.push('/user/login')
+    })
 }
 
 </script>

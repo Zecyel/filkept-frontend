@@ -19,7 +19,7 @@ const routes = [
         component: () => import('@/views/User/Register.vue'),
       }
     ]
-  },
+  }
 ]
 
 const router = createRouter({
