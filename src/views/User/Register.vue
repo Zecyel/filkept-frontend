@@ -1,32 +1,30 @@
 <template>
-    <v-card
-        max-width="500"
-        min-width="300"
-        class="mx-auto"
-        style="margin-top: 40px;"
-    >
-        <v-card-item>
-            <v-card-title>注册</v-card-title>
-        </v-card-item>
-        <v-card-text>
-            <v-form validate-on="submit lazy" @submit.prevent="submit">
-              <v-text-field
-                v-model="data.username"
-                label="用户名"
-              ></v-text-field>
-              <v-text-field
-                v-model="data.password"
-                label="密码"
-              ></v-text-field>
-              <v-btn
-                type="submit"
-                block
-                class="mt-2"
-                text="Submit"
-              ></v-btn>
-            </v-form>
-        </v-card-text>
-    </v-card>
+  <v-sheet
+    max-width="500"
+    min-width="300"
+    elevation="5"
+    class="align-center justify-center mx-auto"
+    style="margin-top: 40px; padding: 20px;"
+  >
+    <div class="text-h5 text-center" style="margin-bottom: 10px">注册</div>
+    <v-form validate-on="submit lazy" @submit.prevent="submit">
+      <v-text-field
+        v-model="data.username"
+        label="用户名"
+      ></v-text-field>
+      <v-text-field
+        v-model="data.password"
+        label="密码"
+      ></v-text-field>
+      <v-btn
+        type="submit"
+        block
+        class="mt-2"
+        text="登录"
+      ></v-btn>
+      <br />
+    </v-form>
+  </v-sheet>
 </template>
 
 <script lang="ts" setup>
