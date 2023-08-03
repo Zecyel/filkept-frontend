@@ -31,6 +31,10 @@ const routes = [
         path: 'upload',
         name: 'Upload',
         component: () => import('@/views/Ebook/Upload.vue')
+      }, {
+        path: 'read/:bookid',
+        name: 'Read',
+        component: () => import('@/views/Ebook/Read.vue')
       }
     ]
   }

@@ -22,13 +22,30 @@ let BookListApi: Api = {
     token: 'must',
     req: new Nothing(),
     resp: new List(new Dict({
+        id: new NumberVariant(),
         name: new StringVariant(),
         description: new StringVariant(),
         url: new StringVariant()
     }))
 }
 
+let BookInfoApi: Api = {
+    url: '/ebook/info',
+    method: 'post',
+    token: 'ignore',
+    req: new Dict({
+        bookid: new NumberVariant()
+    }),
+    resp: new Dict({
+        name: new StringVariant(),
+        userid: new NumberVariant(),
+        url: new StringVariant(),
+        description: new StringVariant()
+    })
+}
+
 export {
     BookUploadApi,
-    BookListApi
+    BookListApi,
+    BookInfoApi
 }

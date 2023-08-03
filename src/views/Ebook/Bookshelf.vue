@@ -27,6 +27,7 @@
                 :title="book.name"
                 :key="book.name"
                 :subtitle="book.description"
+                @click="router.push('/ebook/read/' + book.id)"
             ></v-list-item>
         </v-list>
     </v-sheet>
