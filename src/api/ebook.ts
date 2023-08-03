@@ -1,5 +1,5 @@
 import { Api } from "./api";
-import { Dict, Nothing, NumberVariant, StringVariant } from "./type";
+import { Dict, List, Nothing, NumberVariant, StringVariant } from "./type";
 
 let BookUploadApi: Api = {
     url: '/ebook/upload',
@@ -16,6 +16,19 @@ let BookUploadApi: Api = {
     resp: new Nothing()
 }
 
+let BookListApi: Api = {
+    url: '/ebook/list',
+    method: 'post',
+    token: 'must',
+    req: new Nothing(),
+    resp: new List(new Dict({
+        name: new StringVariant(),
+        description: new StringVariant(),
+        url: new StringVariant()
+    }))
+}
+
 export {
-    BookUploadApi
+    BookUploadApi,
+    BookListApi
 }
