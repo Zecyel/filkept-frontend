@@ -36,7 +36,7 @@
 import { reactive } from 'vue';
 import { useUserStore } from '@/store/user';
 import { callApi } from '@/api/api'
-import { UserLoginApi } from '@/api/user/user'
+import { UserLoginApi } from '@/api/user'
 import router from '@/router';
 
 let data = reactive({

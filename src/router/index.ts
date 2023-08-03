@@ -19,6 +19,20 @@ const routes = [
         component: () => import('@/views/User/Register.vue'),
       }
     ]
+  }, {
+    path: '/ebook',
+    // component: () => import('@/views/Ebook/bookshelf.vue'),
+    children: [
+      {
+        path: 'bookshelf',
+        name: 'Bookshelf',
+        component: () => import('@/views/Ebook/bookshelf.vue'),
+      }, {
+        path: 'upload',
+        name: 'Upload',
+        component: () => import('@/views/Ebook/Upload.vue')
+      }
+    ]
   }
 ]
 

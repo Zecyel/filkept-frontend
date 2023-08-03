@@ -17,6 +17,7 @@
     "pinia": "^2.0.0",
     "roboto-fontface": "*",
     "vue": "^3.2.0",
+    "vue-pdf": "^4.3.0",
     "vue-router": "^4.0.0",
     "vue-toastification": "^2.0.0-rc.5",
     "vuetify": "^3.0.0",

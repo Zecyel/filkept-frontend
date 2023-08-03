@@ -30,7 +30,7 @@
 <script lang="ts" setup>
 
 import { callApi } from '@/api/api';
-import { UserRegisterApi } from '@/api/user/user';
+import { UserRegisterApi } from '@/api/user';
 import router from '@/router';
 import { reactive } from 'vue';
 

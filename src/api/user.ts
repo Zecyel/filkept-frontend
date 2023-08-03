@@ -1,5 +1,5 @@
 import { Api } from '@/api/api'
-import { Dict, Nothing, Optional, StringVariant, TypeAnnotation } from '@/api/type'
+import { Dict, Nothing, NumberVariant, Optional, StringVariant } from '@/api/type'
 
 let UserLoginApi: Api = {
     url: '/user/login',
@@ -10,7 +10,8 @@ let UserLoginApi: Api = {
         password: new StringVariant()
     }),
     resp: new Dict({
-        token: new Optional(new StringVariant())
+        token: new Optional(new StringVariant()),
+        // userid: new Optional(new NumberVariant())
     })
 }
 
